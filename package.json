@@ -24,8 +24,9 @@
   ],
   "devDependencies": {
     "@types/webpack-stream": "^3.2.10",
-    "gulp": "^4.0.2",
+    "file-loader": "^6.0.0",
     "husky": "^4.2.3",
+    "image-webpack-loader": "^6.0.0",
     "prettier": "^2.0.4",
     "pretty-quick": "^2.0.1",
     "ts-loader": "^6.2.2",

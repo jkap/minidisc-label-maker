@@ -27,6 +27,7 @@
 
       <p>
         <a class="btn" id="download-link">download label</a>
+        <a class="btn" id="redraw">redraw (fixes broken fonts and artifacts)</a>
       </p>
       <p>
         <label
@@ -45,7 +46,7 @@
       <div class="file-field input-field">
         <div class="btn">
           <span>File</span>
-          <input type="file" accept="image/*" onchange="loadFile(event)" />
+          <input id="art-picker" type="file" accept="image/*" />
         </div>
         <div class="file-path-wrapper">
           <input class="file-path validate" type="text" />
