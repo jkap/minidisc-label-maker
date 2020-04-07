@@ -53,12 +53,11 @@ const $artPicker = document.querySelector<HTMLInputElement>("#art-picker");
 $artPicker.addEventListener("change", loadFile);
 
 function loadFile(event: Event & { target: HTMLInputElement }) {
-  // var reader = new FileReader();
-  // reader.onload = function () {
-  //   window.meta.artURL = reader.result as string;
-  //   drawAlbumArt(window.meta);
-  // };
-  // reader.readAsDataURL(event.target.files[0]);
+  var reader = new FileReader();
+  reader.onload = function () {
+    labeler.setAlbumArt(reader.result as string);
+  };
+  reader.readAsDataURL(event.target.files[0]);
 }
 
 const $downloadButton = document.querySelector<HTMLAnchorElement>(

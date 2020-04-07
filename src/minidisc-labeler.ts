@@ -237,6 +237,11 @@ export class MinidiscLabeler {
     this.drawMeta();
   }
 
+  setAlbumArt(artURL: string) {
+    this.meta.artURL = artURL;
+    this.drawAlbumArt();
+  }
+
   getDataURL(): string {
     let url = this.canvas.toDataURL("image/png");
     url = changeDpiDataUrl(url, 300);
