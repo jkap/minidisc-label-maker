@@ -1,0 +1,43 @@
+{
+  "name": "my-glitch-app",
+  "version": "0.0.1",
+  "description": "What am I about?",
+  "private": true,
+  "scripts": {
+    "build": "gulp",
+    "start": "tsc && node server.js"
+  },
+  "dependencies": {
+    "changedpi": "^1.0.4"
+  },
+  "repository": {
+    "url": "https://glitch.com/#!/project/welcome-project"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ],
+  "devDependencies": {
+    "@types/webpack-stream": "^3.2.10",
+    "gulp": "^4.0.2",
+    "husky": "^4.2.3",
+    "prettier": "^2.0.4",
+    "pretty-quick": "^2.0.1",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-stream": "^5.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}
