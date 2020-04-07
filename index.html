@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Hello!</title>
+    <title>minidisc label generator</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="https://use.typekit.net/elb5ydo.css" />
 
     <!-- Compiled and minified CSS -->
@@ -43,15 +41,29 @@
         <label>year <input id="year" type="text" value="2019" /></label><br />
       </p>
 
-      <div class="file-field input-field">
-        <div class="btn">
-          <span>File</span>
-          <input id="art-picker" type="file" accept="image/*" />
+      <label
+        >album art
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input id="art-picker" type="file" accept="image/*" />
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" />
+          </div>
         </div>
-        <div class="file-path-wrapper">
-          <input class="file-path validate" type="text" />
-        </div>
-      </div>
+      </label>
+      <p>
+        design inspired by
+        <a
+          href="https://www.reddit.com/r/minidisc/comments/ful65q/recording_session_minidiscs_with_custom_labels/"
+          >/u/aaarchvz</a
+        >
+      </p>
+      <p>
+        developed by <a href="https://twitter.com/jkap">jae kaplan</a>,
+        <a href="https://github.com/jkap/minidisc-label-maker">fork us</a>
+      </p>
     </div>
   </body>
 </html>
