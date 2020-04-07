@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello!</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/elb5ydo.css" />
+
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- import the webpage's javascript file -->
+    <script src="/bundle.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="minidisc" width="432" height="612"> </canvas>
+
+      <p>
+        <a class="btn" id="download-link">download label</a>
+      </p>
+      <p>
+        <label
+          >album
+          <input
+            id="album-name"
+            type="text"
+            value="the first glass beach album" /></label
+        ><br /><label
+          >artist
+          <input id="artist-name" type="text" value="glass beach" /></label
+        ><br />
+        <label>year <input id="year" type="text" value="2019" /></label><br />
+      </p>
+
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>File</span>
+          <input type="file" accept="image/*" onchange="loadFile(event)" />
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" />
+        </div>
+      </div>
+    </div>
+
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <div
+      class="glitchButton"
+      style="position: fixed; top: 20px; right: 20px;"
+    ></div>
+    <script src="https://button.glitch.me/button.js"></script>
+  </body>
+</html>
