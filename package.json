@@ -4,7 +4,7 @@
   "description": "What am I about?",
   "private": true,
   "scripts": {
-    "build": "gulp",
+    "build": "webpack",
     "start": "tsc && node server.js"
   },
   "dependencies": {
