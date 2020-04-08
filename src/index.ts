@@ -2,8 +2,6 @@ import * as GlassBeachArt from "../images/glass-beach.jpg";
 import { MinidiscLabeler, Metadata } from "./minidisc-labeler";
 import * as WebFont from "webfontloader";
 
-require("file-loader?name=[name].[ext]!../index.html");
-
 let canvas = document.querySelector<HTMLCanvasElement>("#minidisc");
 
 const defaultMeta: Metadata = {

@@ -1,4 +1,5 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.ts",
@@ -29,7 +30,14 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    filename: "bundle.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
   },
+  optimization: {
+    usedExports: true,
+    splitChunks: {
+      chunks: "all",
+    },
+  },
+  plugins: [new HtmlWebpackPlugin()],
 };
