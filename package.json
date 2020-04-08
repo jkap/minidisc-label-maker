@@ -8,7 +8,8 @@
     "start": "tsc && node server.js"
   },
   "dependencies": {
-    "changedpi": "^1.0.4"
+    "changedpi": "^1.0.4",
+    "webfontloader": "^1.6.28"
   },
   "repository": {
     "url": "https://glitch.com/#!/project/welcome-project"
@@ -23,6 +24,7 @@
     "express"
   ],
   "devDependencies": {
+    "@types/webfontloader": "^1.6.29",
     "@types/webpack-stream": "^3.2.10",
     "file-loader": "^6.0.0",
     "husky": "^4.2.3",

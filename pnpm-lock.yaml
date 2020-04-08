@@ -1,6 +1,8 @@
 dependencies:
   changedpi: 1.0.4
+  webfontloader: 1.6.28
 devDependencies:
+  "@types/webfontloader": 1.6.29
   "@types/webpack-stream": 3.2.10
   file-loader: 6.0.0_webpack@4.42.1
   husky: 4.2.3
@@ -121,6 +123,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-L7EbSkhSaWBpkl+PZAEAqZTqtTeIsq7s/oX/q0LNnxxJoRVKQE0T81XDVyaxjiiKQwiV2vhVeYRqxdRNqGOGJw==
+  /@types/webfontloader/1.6.29:
+    dev: true
+    resolution:
+      integrity: sha512-wobuM+LvpkzU296NsFVRGDAFWw3X2XEhrLHuvV+VGSbok6aOxQcymmopUFwNB69qy5oudHt9lYC0JF+z+DxFLw==
   /@types/webpack-sources/0.1.7:
     dependencies:
       "@types/node": 13.11.0
@@ -6314,6 +6320,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA==
+  /webfontloader/1.6.28:
+    dev: false
+    resolution:
+      integrity: sha1-23hhKSU8tujq5UwvsF+HCvZnW64=
   /webpack-cli/3.3.11_webpack@4.42.1:
     dependencies:
       chalk: 2.4.2
@@ -6623,6 +6633,7 @@ packages:
     resolution:
       integrity: sha1-x+sXyT4RLLEIb6bY5R+wZnt5pfk=
 specifiers:
+  "@types/webfontloader": ^1.6.29
   "@types/webpack-stream": ^3.2.10
   changedpi: ^1.0.4
   file-loader: ^6.0.0
@@ -6632,6 +6643,7 @@ specifiers:
   pretty-quick: ^2.0.1
   ts-loader: ^6.2.2
   typescript: ^3.8.3
+  webfontloader: ^1.6.28
   webpack: ^4.42.1
   webpack-cli: ^3.3.11
   webpack-dev-server: ^3.10.3

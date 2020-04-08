@@ -1,5 +1,6 @@
 import * as GlassBeachArt from "../images/glass-beach.jpg";
 import { MinidiscLabeler, Metadata } from "./minidisc-labeler";
+import * as WebFont from "webfontloader";
 
 require("file-loader?name=[name].[ext]!../index.html");
 
@@ -25,7 +26,7 @@ const labeler = new MinidiscLabeler(
   defaultMeta
 );
 
-labeler.draw();
+// labeler.draw();
 
 const $artist = document.querySelector<HTMLInputElement>("#artist-name");
 const $album = document.querySelector<HTMLInputElement>("#album-name");
@@ -72,3 +73,10 @@ $downloadButton.addEventListener("click", function download(
 
 const $redrawButton = document.querySelector<HTMLAnchorElement>("#redraw");
 $redrawButton.addEventListener("click", labeler.draw.bind(labeler));
+
+WebFont.load({
+  typekit: {
+    id: "elb5ydo",
+  },
+  active: () => labeler.draw(),
+});
