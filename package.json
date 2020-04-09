@@ -1,5 +1,6 @@
 {
   "name": "my-glitch-app",
+  "sideEffects": false,
   "version": "0.0.1",
   "description": "What am I about?",
   "private": true,

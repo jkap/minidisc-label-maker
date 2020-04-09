@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.ts",
+  mode: "production",
   module: {
     rules: [
       {
@@ -17,6 +18,7 @@ module.exports = {
             loader: "file-loader",
             options: {
               esModule: false,
+              name: "images/[name].[contenthash].[ext]",
             },
           },
           {
