@@ -23,6 +23,11 @@ module.exports = {
           },
           {
             loader: "image-webpack-loader",
+            options: {
+              mozjpeg: {
+                quality: 80,
+              },
+            },
           },
         ],
       },
