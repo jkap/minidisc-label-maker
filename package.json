@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "changedpi": "^1.0.4",
-    "materialize-css": "^1.0.0-rc.2",
+    "materialize-css": "^1.0.0",
     "webfontloader": "^1.6.28"
   },
   "repository": {
