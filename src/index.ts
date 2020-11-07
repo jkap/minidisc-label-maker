@@ -66,12 +66,16 @@ const $downloadButton = document.querySelector<HTMLAnchorElement>(
 $downloadButton.addEventListener("click", function download(
   e: Event & { target: HTMLAnchorElement }
 ) {
+  window.sa_event("download_art");
   e.target.download = `${labeler.meta.album}-label.png`;
   e.target.href = labeler.getDataURL();
 });
 
 const $redrawButton = document.querySelector<HTMLAnchorElement>("#redraw");
-$redrawButton.addEventListener("click", labeler.draw.bind(labeler));
+$redrawButton.addEventListener("click", () => {
+  window.sa_event("redraw_art");
+  labeler.draw();
+});
 
 WebFont.load({
   typekit: {
