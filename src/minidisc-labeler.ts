@@ -1,5 +1,6 @@
 import { changeDpiDataUrl } from "changedpi";
 import * as MDLogo from "../images/md-logo.svg";
+import { Theme, Themes } from "./themes";
 
 export interface CanvasSettings {
   width: number;
@@ -8,6 +9,7 @@ export interface CanvasSettings {
   fontSize: number;
   lineHeight: number;
   headerHeight: number;
+  theme: Theme;
 }
 
 export interface Metadata {
@@ -46,7 +48,7 @@ export class MinidiscLabeler {
   }
 
   private initCanvas() {
-    this.ctx.fillStyle = "#231F20";
+    this.ctx.fillStyle = this.settings.theme.bgColor;
     this.ctx.fillRect(
       0,
       0,
@@ -75,7 +77,7 @@ export class MinidiscLabeler {
       1.2593 * this.settings.ppm,
       0
     );
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = this.settings.theme.fgColor;
 
     this.ctx.beginPath();
     this.ctx.moveTo(3.25 * this.settings.ppm, y);
@@ -88,7 +90,7 @@ export class MinidiscLabeler {
     this.ctx.font = `bold ${
       this.settings.fontSize * this.settings.ppm
     }px futura-pt-bold`;
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = this.settings.theme.fgColor;
 
     let y = this.calculateCentering(
       this.settings.headerHeight * this.settings.ppm,
@@ -108,7 +110,7 @@ export class MinidiscLabeler {
     image.addEventListener(
       "load",
       () => {
-        this.ctx.fillStyle = "#231F20";
+        this.ctx.fillStyle = this.settings.theme.bgColor;
         this.ctx.fillRect(
           0,
           5 * this.settings.ppm,
@@ -168,7 +170,7 @@ export class MinidiscLabeler {
   }
 
   private drawMeta() {
-    this.ctx.fillStyle = "#231F20";
+    this.ctx.fillStyle = this.settings.theme.bgColor;
     this.ctx.fillRect(
       0,
       41 * this.settings.ppm,
@@ -179,7 +181,7 @@ export class MinidiscLabeler {
     this.ctx.font = `bold ${
       this.settings.fontSize * this.settings.ppm
     }px futura-pt-bold`;
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = this.settings.theme.fgColor;
 
     const metaHeight =
       (this.settings.lineHeight +
@@ -194,7 +196,6 @@ export class MinidiscLabeler {
       metaHeight,
       41 * this.settings.ppm
     );
-    console.log(y);
 
     this.ctx.fillText(
       this.meta.album.toUpperCase(),
@@ -240,6 +241,11 @@ export class MinidiscLabeler {
   setAlbumArt(artURL: string) {
     this.meta.artURL = artURL;
     this.drawAlbumArt();
+  }
+
+  setTheme(theme: Theme) {
+    this.settings.theme = theme;
+    this.draw();
   }
 
   getDataURL(): string {

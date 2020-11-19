@@ -1,5 +1,6 @@
 import * as GlassBeachArt from "../images/glass-beach.jpg";
 import { MinidiscLabeler, Metadata } from "./minidisc-labeler";
+import { Theme, Themes } from "./themes";
 import * as WebFont from "webfontloader";
 import "./style.scss";
 
@@ -21,6 +22,7 @@ const labeler = new MinidiscLabeler(
     fontSize: 1.76,
     lineHeight: 2.12,
     headerHeight: 5,
+    theme: Themes.Dark,
   },
   defaultMeta
 );
@@ -30,6 +32,9 @@ const labeler = new MinidiscLabeler(
 const $artist = document.querySelector<HTMLInputElement>("#artist-name");
 const $album = document.querySelector<HTMLInputElement>("#album-name");
 const $year = document.querySelector<HTMLInputElement>("#year");
+const $themeRadios = document.querySelectorAll<HTMLInputElement>(
+  'input[type="radio"][name="theme"]'
+);
 
 function updateMeta(e: Event & { target: HTMLInputElement }) {
   switch (e.target.id) {
@@ -45,9 +50,30 @@ function updateMeta(e: Event & { target: HTMLInputElement }) {
   }
 }
 
+function updateTheme(e: Event & { target: HTMLInputElement }) {
+  let theme: Theme;
+  switch (e.target.value) {
+    case "light":
+      theme = Themes.Light;
+      break;
+    case "dark":
+      theme = Themes.Dark;
+      break;
+  }
+
+  if (!theme) {
+    return;
+  }
+  labeler.setTheme(theme);
+}
+
 $artist.addEventListener("input", updateMeta);
 $album.addEventListener("input", updateMeta);
 $year.addEventListener("input", updateMeta);
+
+$themeRadios.forEach(($radio) =>
+  $radio.addEventListener("change", updateTheme)
+);
 
 const $artPicker = document.querySelector<HTMLInputElement>("#art-picker");
 $artPicker.addEventListener("change", loadFile);
