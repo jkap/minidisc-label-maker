@@ -27,8 +27,6 @@ const labeler = new MinidiscLabeler(
   defaultMeta
 );
 
-// labeler.draw();
-
 const $artist = document.querySelector<HTMLInputElement>("#artist-name");
 const $album = document.querySelector<HTMLInputElement>("#album-name");
 const $year = document.querySelector<HTMLInputElement>("#year");
