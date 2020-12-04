@@ -25,7 +25,7 @@ jobs:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - run: pnpm install
       - run: pnpm run build
