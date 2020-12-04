@@ -1,17 +1,10 @@
-import * as GlassBeachArt from "../images/glass-beach.jpg";
 import { MinidiscLabeler, Metadata } from "./minidisc-labeler";
 import { Theme, Themes } from "./themes";
 import * as WebFont from "webfontloader";
 import "./style.scss";
+import { getRandomMeta } from "./meta";
 
 let canvas = document.querySelector<HTMLCanvasElement>("#minidisc");
-
-const defaultMeta: Metadata = {
-  artist: "glass beach",
-  album: "the first glass beach album",
-  year: "2019",
-  artURL: GlassBeachArt,
-};
 
 const labeler = new MinidiscLabeler(
   canvas,
@@ -24,7 +17,7 @@ const labeler = new MinidiscLabeler(
     headerHeight: 5,
     theme: Themes.Dark,
   },
-  defaultMeta
+  getRandomMeta()
 );
 
 const $artist = document.querySelector<HTMLInputElement>("#artist-name");
@@ -34,7 +27,7 @@ const $themeRadios = document.querySelectorAll<HTMLInputElement>(
   'input[type="radio"][name="theme"]'
 );
 
-function updateMeta(e: Event & { target: HTMLInputElement }) {
+function metaFieldsChanged(e: Event & { target: HTMLInputElement }) {
   switch (e.target.id) {
     case "artist-name":
       labeler.setArtist(e.target.value);
@@ -65,9 +58,17 @@ function updateTheme(e: Event & { target: HTMLInputElement }) {
   labeler.setTheme(theme);
 }
 
-$artist.addEventListener("input", updateMeta);
-$album.addEventListener("input", updateMeta);
-$year.addEventListener("input", updateMeta);
+function updateMetaFields() {
+  $artist.value = labeler.meta.artist;
+  $album.value = labeler.meta.album;
+  $year.value = labeler.meta.year;
+}
+
+$artist.addEventListener("input", metaFieldsChanged);
+$album.addEventListener("input", metaFieldsChanged);
+$year.addEventListener("input", metaFieldsChanged);
+
+updateMetaFields();
 
 $themeRadios.forEach(($radio) =>
   $radio.addEventListener("change", updateTheme)
@@ -87,19 +88,28 @@ function loadFile(event: Event & { target: HTMLInputElement }) {
 const $downloadButton = document.querySelector<HTMLAnchorElement>(
   "#download-link"
 );
-$downloadButton.addEventListener("click", function download(
-  e: Event & { target: HTMLAnchorElement }
-) {
-  window.sa_event("download_art");
-  e.target.download = `${labeler.meta.album}-label.png`;
-  e.target.href = labeler.getDataURL();
-});
+$downloadButton.addEventListener(
+  "click",
+  function download(e: Event & { target: HTMLAnchorElement }) {
+    window.sa_event("download_art");
+    e.target.download = `${labeler.meta.album}-label.png`;
+    e.target.href = labeler.getDataURL();
+  }
+);
 
 const $redrawButton = document.querySelector<HTMLAnchorElement>("#redraw");
 $redrawButton.addEventListener("click", () => {
   window.sa_event("redraw_art");
   labeler.draw();
 });
+
+// const $randomButton = document.querySelector<HTMLAnchorElement>("#randomize");
+// $randomButton.addEventListener("click", () => {
+//   window.sa_event("randomize");
+//   labeler.meta = getRandomMeta();
+//   updateMetaFields();
+//   labeler.draw();
+// });
 
 WebFont.load({
   typekit: {
