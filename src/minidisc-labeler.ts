@@ -1,6 +1,6 @@
 import { changeDpiDataUrl } from "changedpi";
 import * as MDLogo from "../images/md-logo.svg";
-import { Theme, Themes } from "./themes";
+import { Theme } from "./themes";
 
 export interface CanvasSettings {
   width: number;
@@ -10,6 +10,7 @@ export interface CanvasSettings {
   lineHeight: number;
   headerHeight: number;
   theme: Theme;
+  uppercase: boolean;
 }
 
 export interface Metadata {
@@ -198,12 +199,14 @@ export class MinidiscLabeler {
     );
 
     this.ctx.fillText(
-      this.meta.album.toUpperCase(),
+      this.settings.uppercase ? this.meta.album.toUpperCase() : this.meta.album,
       2 * this.settings.ppm,
       Math.round(y + this.settings.fontSize * this.settings.ppm)
     );
     this.ctx.fillText(
-      this.meta.artist.toUpperCase(),
+      this.settings.uppercase
+        ? this.meta.artist.toUpperCase()
+        : this.meta.artist,
       2 * this.settings.ppm,
       Math.round(
         y +
@@ -212,7 +215,7 @@ export class MinidiscLabeler {
       )
     );
     this.ctx.fillText(
-      this.meta.year.toUpperCase(),
+      this.settings.uppercase ? this.meta.year.toUpperCase() : this.meta.year,
       2 * this.settings.ppm,
       Math.round(
         y +
@@ -246,6 +249,11 @@ export class MinidiscLabeler {
   setTheme(theme: Theme) {
     this.settings.theme = theme;
     this.draw();
+  }
+
+  setUppercase(uppercase: boolean) {
+    this.settings.uppercase = uppercase;
+    this.drawMeta();
   }
 
   getDataURL(): string {

@@ -1,4 +1,4 @@
-import { MinidiscLabeler, Metadata } from "./minidisc-labeler";
+import { MinidiscLabeler } from "./minidisc-labeler";
 import { Theme, Themes } from "./themes";
 import * as WebFont from "webfontloader";
 import "./style.scss";
@@ -16,6 +16,7 @@ const labeler = new MinidiscLabeler(
     lineHeight: 2.12,
     headerHeight: 5,
     theme: Themes.Dark,
+    uppercase: true,
   },
   getRandomMeta()
 );
@@ -26,6 +27,7 @@ const $year = document.querySelector<HTMLInputElement>("#year");
 const $themeRadios = document.querySelectorAll<HTMLInputElement>(
   'input[type="radio"][name="theme"]'
 );
+const $uppercase = document.querySelector<HTMLInputElement>("#uppercase");
 
 function metaFieldsChanged(e: Event & { target: HTMLInputElement }) {
   switch (e.target.id) {
@@ -58,6 +60,10 @@ function updateTheme(e: Event & { target: HTMLInputElement }) {
   labeler.setTheme(theme);
 }
 
+function toggleUppercase(e: Event & { target: HTMLInputElement }) {
+  labeler.setUppercase(e.target.checked);
+}
+
 function updateMetaFields() {
   $artist.value = labeler.meta.artist;
   $album.value = labeler.meta.album;
@@ -73,6 +79,7 @@ updateMetaFields();
 $themeRadios.forEach(($radio) =>
   $radio.addEventListener("change", updateTheme)
 );
+$uppercase.addEventListener("change", toggleUppercase);
 
 const $artPicker = document.querySelector<HTMLInputElement>("#art-picker");
 $artPicker.addEventListener("change", loadFile);
