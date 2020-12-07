@@ -195,7 +195,7 @@ export class MinidiscLabeler {
     y = this.calculateCentering(
       10 * this.settings.ppm,
       metaHeight,
-      41 * this.settings.ppm
+      43 * this.settings.ppm
     );
 
     this.ctx.fillText(

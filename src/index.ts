@@ -9,8 +9,8 @@ let canvas = document.querySelector<HTMLCanvasElement>("#minidisc");
 const labeler = new MinidiscLabeler(
   canvas,
   {
-    width: 36,
-    height: 51,
+    width: 38,
+    height: 54,
     ppm: 11.811,
     fontSize: 1.76,
     lineHeight: 2.12,

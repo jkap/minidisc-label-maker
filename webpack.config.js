@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.ts",
@@ -22,10 +23,11 @@ module.exports = {
             },
           },
           {
-            loader: "image-webpack-loader",
+            loader: ImageMinimizerPlugin.loader,
             options: {
-              mozjpeg: {
-                quality: 80,
+              severityError: "warning", // Ignore errors on corrupted images
+              minimizerOptions: {
+                plugins: ["gifsicle", "jpegtran", "optipng", "svgo"],
               },
             },
           },

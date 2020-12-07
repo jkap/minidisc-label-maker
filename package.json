@@ -17,7 +17,7 @@
     "url": "https://glitch.com/#!/project/welcome-project"
   },
   "engines": {
-    "node": "10.x"
+    "node": "15.x"
   },
   "license": "MIT",
   "keywords": [
@@ -32,7 +32,12 @@
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.0.4",
     "husky": "^4.2.3",
+    "image-minimizer-webpack-plugin": "^1.0.0",
     "image-webpack-loader": "^6.0.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^8.0.0",
     "prettier": "^2.0.4",
     "pretty-quick": "^2.0.1",
     "sass": "^1.26.8",
