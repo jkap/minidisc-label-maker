@@ -174,7 +174,7 @@ export class MinidiscLabeler {
     this.ctx.fillStyle = this.settings.theme.bgColor;
     this.ctx.fillRect(
       0,
-      41 * this.settings.ppm,
+      43 * this.settings.ppm,
       this.settings.width * this.settings.ppm,
       10 * this.settings.ppm
     );
