@@ -2,13 +2,18 @@ import { changeDpiDataUrl } from "changedpi";
 import * as MDLogo from "../images/md-logo.svg";
 import { Theme } from "./themes";
 
+function ppm(mm: number): number {
+  return 11.811 * mm;
+}
+
 export interface CanvasSettings {
   width: number;
   height: number;
-  ppm: number;
   fontSize: number;
   lineHeight: number;
   headerHeight: number;
+  metaContainerHeight: number;
+  leftMargin: number;
   theme: Theme;
   uppercase: boolean;
 }
@@ -53,14 +58,14 @@ export class MinidiscLabeler {
     this.ctx.fillRect(
       0,
       0,
-      this.settings.width * this.settings.ppm,
-      this.settings.height * this.settings.ppm
+      ppm(this.settings.width),
+      ppm(this.settings.height)
     );
   }
 
   private setupDrawing() {
-    this.canvas.height = this.settings.height * this.settings.ppm;
-    this.canvas.width = this.settings.width * this.settings.ppm;
+    this.canvas.height = ppm(this.settings.height);
+    this.canvas.width = ppm(this.settings.width);
   }
 
   private calculateCentering(
@@ -72,36 +77,37 @@ export class MinidiscLabeler {
   }
 
   private drawArrow() {
-    // 1.2593
+    const ARROW_HEIGHT = 1.25;
     let y = this.calculateCentering(
-      this.settings.headerHeight * this.settings.ppm,
-      1.2593 * this.settings.ppm,
+      ppm(this.settings.headerHeight),
+      ppm(ARROW_HEIGHT),
       0
     );
     this.ctx.fillStyle = this.settings.theme.fgColor;
 
     this.ctx.beginPath();
-    this.ctx.moveTo(3.25 * this.settings.ppm, y);
-    this.ctx.lineTo(4.5 * this.settings.ppm, y + 1.2593 * this.settings.ppm);
-    this.ctx.lineTo(2 * this.settings.ppm, y + 1.2593 * this.settings.ppm);
+    this.ctx.moveTo(ppm(this.settings.leftMargin + ARROW_HEIGHT), y);
+    this.ctx.lineTo(
+      ppm(this.settings.leftMargin + ARROW_HEIGHT * 2),
+      y + ppm(ARROW_HEIGHT)
+    );
+    this.ctx.lineTo(ppm(this.settings.leftMargin), y + ppm(ARROW_HEIGHT));
     this.ctx.fill();
   }
 
   private drawInsertText() {
-    this.ctx.font = `bold ${
-      this.settings.fontSize * this.settings.ppm
-    }px futura-pt-bold`;
+    this.ctx.font = `bold ${ppm(this.settings.fontSize)}px futura-pt-bold`;
     this.ctx.fillStyle = this.settings.theme.fgColor;
 
     let y = this.calculateCentering(
-      this.settings.headerHeight * this.settings.ppm,
-      this.settings.lineHeight * this.settings.ppm,
+      ppm(this.settings.headerHeight),
+      ppm(this.settings.lineHeight),
       0
     );
     this.ctx.fillText(
       "INSERT THIS END",
-      5.5 * this.settings.ppm,
-      Math.round(y + this.settings.fontSize * this.settings.ppm)
+      ppm(5.5),
+      Math.round(y + ppm(this.settings.fontSize))
     );
   }
 
@@ -114,24 +120,34 @@ export class MinidiscLabeler {
         this.ctx.fillStyle = this.settings.theme.bgColor;
         this.ctx.fillRect(
           0,
-          5 * this.settings.ppm,
-          this.settings.width * this.settings.ppm,
-          this.settings.width * this.settings.ppm
+          ppm(5),
+          ppm(this.settings.width),
+          ppm(this.settings.width)
         );
 
-        const imageWidth = image.width;
-        const scaleFactor =
-          (this.settings.width * this.settings.ppm) / imageWidth;
-        const displayHeight = image.height * scaleFactor;
+        let displayWidth: number;
+        let displayHeight: number;
+        let scaleFactor: number;
+
+        if (image.width >= image.height) {
+          displayWidth = ppm(this.settings.width);
+          scaleFactor = ppm(this.settings.width) / image.width;
+          displayHeight = image.height * scaleFactor;
+        } else {
+          displayHeight = ppm(this.settings.width);
+          scaleFactor = ppm(this.settings.width) / image.height;
+          displayWidth = image.width * scaleFactor;
+        }
+
         this.ctx.drawImage(
           image,
-          0,
+          this.calculateCentering(ppm(this.settings.width), displayWidth),
           this.calculateCentering(
-            this.settings.width * this.settings.ppm,
+            ppm(this.settings.width),
             displayHeight,
-            this.settings.headerHeight * this.settings.ppm
+            ppm(this.settings.headerHeight)
           ),
-          this.settings.width * this.settings.ppm,
+          displayWidth,
           displayHeight
         );
       },
@@ -148,19 +164,19 @@ export class MinidiscLabeler {
       "load",
       () => {
         const imageWidth = logo.width;
-        const scaleFactor = (logoDisplayWidth * this.settings.ppm) / imageWidth;
+        const scaleFactor = ppm(logoDisplayWidth) / imageWidth;
         const displayHeight = logo.height * scaleFactor;
         this.ctx.drawImage(
           logo,
-          this.settings.width * this.settings.ppm -
-            2 * this.settings.ppm -
-            logoDisplayWidth * this.settings.ppm,
+          ppm(
+            this.settings.width - this.settings.leftMargin - logoDisplayWidth
+          ),
           this.calculateCentering(
-            this.settings.headerHeight * this.settings.ppm,
+            ppm(this.settings.headerHeight),
             displayHeight,
             0
           ),
-          logoDisplayWidth * this.settings.ppm,
+          ppm(logoDisplayWidth),
           displayHeight
         );
       },
@@ -174,54 +190,50 @@ export class MinidiscLabeler {
     this.ctx.fillStyle = this.settings.theme.bgColor;
     this.ctx.fillRect(
       0,
-      43 * this.settings.ppm,
-      this.settings.width * this.settings.ppm,
-      10 * this.settings.ppm
+      ppm(this.settings.width + this.settings.headerHeight),
+      ppm(this.settings.width),
+      ppm(this.settings.metaContainerHeight)
     );
 
-    this.ctx.font = `bold ${
-      this.settings.fontSize * this.settings.ppm
-    }px futura-pt-bold`;
+    this.ctx.font = `bold ${ppm(this.settings.fontSize)}px futura-pt-bold`;
     this.ctx.fillStyle = this.settings.theme.fgColor;
 
-    const metaHeight =
-      (this.settings.lineHeight +
+    const metaContentHeight = ppm(
+      this.settings.lineHeight +
         this.settings.lineHeight +
-        this.settings.fontSize) *
-      this.settings.ppm;
+        this.settings.fontSize
+    );
 
     let y;
 
     y = this.calculateCentering(
-      10 * this.settings.ppm,
-      metaHeight,
-      43 * this.settings.ppm
+      ppm(this.settings.metaContainerHeight),
+      metaContentHeight,
+      ppm(this.settings.width + this.settings.headerHeight)
     );
 
     this.ctx.fillText(
       this.settings.uppercase ? this.meta.album.toUpperCase() : this.meta.album,
-      2 * this.settings.ppm,
-      Math.round(y + this.settings.fontSize * this.settings.ppm)
+      ppm(this.settings.leftMargin),
+      Math.round(y + ppm(this.settings.fontSize))
     );
     this.ctx.fillText(
       this.settings.uppercase
         ? this.meta.artist.toUpperCase()
         : this.meta.artist,
-      2 * this.settings.ppm,
+      ppm(this.settings.leftMargin),
       Math.round(
-        y +
-          this.settings.lineHeight * this.settings.ppm +
-          this.settings.fontSize * this.settings.ppm
+        y + ppm(this.settings.lineHeight) + ppm(this.settings.fontSize)
       )
     );
     this.ctx.fillText(
       this.settings.uppercase ? this.meta.year.toUpperCase() : this.meta.year,
-      2 * this.settings.ppm,
+      ppm(this.settings.leftMargin),
       Math.round(
         y +
-          this.settings.lineHeight * this.settings.ppm +
-          this.settings.lineHeight * this.settings.ppm +
-          this.settings.fontSize * this.settings.ppm
+          ppm(this.settings.lineHeight) +
+          ppm(this.settings.lineHeight) +
+          ppm(this.settings.fontSize)
       )
     );
   }

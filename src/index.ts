@@ -11,10 +11,11 @@ const labeler = new MinidiscLabeler(
   {
     width: 38,
     height: 54,
-    ppm: 11.811,
     fontSize: 1.76,
     lineHeight: 2.12,
     headerHeight: 5,
+    metaContainerHeight: 11,
+    leftMargin: 2,
     theme: Themes.Dark,
     uppercase: true,
   },
