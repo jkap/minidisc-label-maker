@@ -20,17 +20,35 @@ export const defaultMetas: Metadata[] = [
     artURL: require("../images/somewhere-city.jpg"),
   },
   {
-	  artist: "長谷川白紙",
-	  album: "草木萌動",
-	  year: "2018",
-	  artURL: require("../images/somoku-hodo.jpg"),
-	},
-	{
-	  artist: "my chemical romance",
-	  album: "three cheers for sweet revenge",
-	  year: "2004",
-	  artURL: require("../images/three-cheers.jpg"),
-	},
+    artist: "長谷川白紙",
+    album: "草木萌動",
+    year: "2018",
+    artURL: require("../images/somoku-hodo.jpg"),
+  },
+  {
+    artist: "my chemical romance",
+    album: "three cheers for sweet revenge",
+    year: "2004",
+    artURL: require("../images/three-cheers.jpg"),
+  },
+  {
+    artist: "DV-i",
+    album: "implementation",
+    year: "2020",
+    artURL: require("../images/implementation.png"),
+  },
+  {
+    artist: "girls rituals",
+    album: "crap shit",
+    year: "2020",
+    artURL: require("../images/crap-shit.jpg"),
+  },
+  {
+    artist: "wowaka",
+    album: "unhappy refrain",
+    year: "2011",
+    artURL: require("../images/unhappy-refrain.jpg"),
+  },
 ];
 
 export function getRandomMeta(): Metadata {
