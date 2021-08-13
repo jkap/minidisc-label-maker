@@ -35,7 +35,7 @@ export const defaultMetas: Metadata[] = [
     artist: "DV-i",
     album: "implementation",
     year: "2020",
-    artURL: require("../images/implementation.png"),
+    artURL: require("../images/implementation.jpg"),
   },
   {
     artist: "girls rituals",
@@ -48,6 +48,18 @@ export const defaultMetas: Metadata[] = [
     album: "unhappy refrain",
     year: "2011",
     artURL: require("../images/unhappy-refrain.jpg"),
+  },
+  {
+    artist: "vylet pony",
+    album: "cutiemarks",
+    year: "2021",
+    artURL: require("../images/cutiemarks.jpg"),
+  },
+  {
+    artist: "iglooghost",
+    album: "Neō Wax Bloom",
+    year: "2017",
+    artURL: require("../images/neo-wax-bloom.jpg"),
   },
 ];
 
