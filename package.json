@@ -17,7 +17,7 @@
     "url": "https://glitch.com/#!/project/welcome-project"
   },
   "engines": {
-    "node": "16.x"
+    "node": "14.x"
   },
   "license": "MIT",
   "keywords": [
