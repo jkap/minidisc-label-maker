@@ -1,49 +1,49 @@
 body {
-  background-color: #eee;
-  @media (prefers-color-scheme: dark) {
-    background-color: #202123;
-    color: #fff;
-    nav {
-      background-color: #26a69a;
-    }
-    .card {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-    .btn {
-      background-color: #ee6f73;
-    }
-    .divider {
-      opacity: 0.2;
-    }
-    .sidenav {
-      background-color: #2d2d31;
-      li {
-        a {
-          &:not(.subheader) {
-            color: #89b2f5;
-            &:hover {
-              background-color: #3b4043;
-            }
-          }
-          &.subheader {
-            color: #9aa0a6;
-          }
-          .material-icons {
-            color: #9aa0a6;
-          }
+    background-color: #eee;
+    @media (prefers-color-scheme: dark) {
+        background-color: #202123;
+        color: #fff;
+        nav {
+            background-color: #26a69a;
         }
-      }
-    }
-    .collection {
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      .collection-item {
-        background-color: rgba(255, 255, 255, 0.2);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      }
-    }
+        .card {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .btn {
+            background-color: #ee6f73;
+        }
+        .divider {
+            opacity: 0.2;
+        }
+        .sidenav {
+            background-color: #2d2d31;
+            li {
+                a {
+                    &:not(.subheader) {
+                        color: #89b2f5;
+                        &:hover {
+                            background-color: #3b4043;
+                        }
+                    }
+                    &.subheader {
+                        color: #9aa0a6;
+                    }
+                    .material-icons {
+                        color: #9aa0a6;
+                    }
+                }
+            }
+        }
+        .collection {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            .collection-item {
+                background-color: rgba(255, 255, 255, 0.2);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+        }
 
-    input {
-      color: #fff;
+        input {
+            color: #fff;
+        }
     }
-  }
 }

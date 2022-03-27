@@ -1,0 +1,4 @@
+dist
+.parcel-cache
+.nova
+pnpm-lock.yaml
