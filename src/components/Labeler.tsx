@@ -176,8 +176,10 @@ export const Labeler: React.FC<LabelerProps> = ({
     const stage = useRef<Konva.Stage>(null);
     const [fontLoaded, setFontLoaded] = useState(false);
 
-    const getDataUrl: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+    const downloadArt: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
         if (!stage.current) return;
+
+        window.sa_event("download_art");
 
         let url = stage.current.toDataURL();
         url = changeDpiDataUrl(url, 300);
@@ -187,6 +189,8 @@ export const Labeler: React.FC<LabelerProps> = ({
 
     const redraw = () => {
         if (!stage.current) return;
+
+        window.sa_event("redraw_art");
 
         stage.current.draw();
     };
@@ -276,7 +280,7 @@ export const Labeler: React.FC<LabelerProps> = ({
                 </Layer>
             </Stage>
             <p>
-                <a className="btn" onClick={getDataUrl}>
+                <a className="btn" onClick={downloadArt}>
                     download label
                 </a>
                 <a className="btn" onClick={redraw}>
