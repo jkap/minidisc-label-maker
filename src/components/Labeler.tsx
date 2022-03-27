@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import type Konva from "konva";
 import {
     Stage,
@@ -211,7 +211,7 @@ export const Labeler: React.FC<LabelerProps> = ({
                 </Layer>
                 <Layer>
                     <Line
-                        fill="white"
+                        fill={theme.fgColor}
                         closed={true}
                         points={[
                             leftMargin + ARROW_HEIGHT,
