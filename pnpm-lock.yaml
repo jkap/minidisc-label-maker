@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@parcel/service-worker': ^2.4.0
   '@parcel/transformer-sass': ^2.4.0
   '@types/react': ^17.0.43
   '@types/react-dom': ^17.0.14
@@ -30,6 +31,7 @@ specifiers:
   webfontloader: ^1.6.28
 
 dependencies:
+  '@parcel/service-worker': 2.4.0
   changedpi: 1.0.4
   konva: 8.3.5
   materialize-css: 1.0.0
@@ -668,6 +670,11 @@ packages:
       '@parcel/utils': 2.4.0
       nullthrows: 1.1.1
     dev: true
+
+  /@parcel/service-worker/2.4.0:
+    resolution: {integrity: sha512-GL8/mU0kuirg8drZ6I8q3R7UJ2Xpjqt1BIF6BoZQQ2SJvXsQORujWNGLKOIUQ23yuAyC5uMOd8Am6Innwd2oqw==}
+    engines: {node: '>= 12.0.0', parcel: ^2.4.0}
+    dev: false
 
   /@parcel/source-map/2.0.2:
     resolution: {integrity: sha512-NnUrPYLpYB6qyx2v6bcRPn/gVigmGG6M6xL8wIg/i0dP1GLkuY1nf+Hqdf63FzPTqqT7K3k6eE5yHPQVMO5jcA==}

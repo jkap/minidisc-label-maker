@@ -10,6 +10,7 @@
         "start": "parcel"
     },
     "dependencies": {
+        "@parcel/service-worker": "^2.4.0",
         "changedpi": "^1.0.4",
         "konva": "^8.3.5",
         "materialize-css": "^1.0.0",
