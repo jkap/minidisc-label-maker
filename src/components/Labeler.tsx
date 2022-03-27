@@ -120,6 +120,7 @@ const Meta: React.FC<{
                 fill={color}
                 x={margin}
                 y={0}
+                lineHeight={fontSize}
             />
             <Text
                 fontSize={fontSize}
@@ -129,6 +130,7 @@ const Meta: React.FC<{
                 fill={color}
                 x={margin}
                 y={lineHeight}
+                lineHeight={fontSize}
             />
             <Text
                 fontSize={fontSize}
@@ -138,6 +140,7 @@ const Meta: React.FC<{
                 fill={color}
                 x={margin}
                 y={lineHeight * 2}
+                lineHeight={fontSize}
             />
         </Group>
     );
@@ -224,17 +227,15 @@ export const Labeler: React.FC<LabelerProps> = ({
                     />
                     {fontLoaded ? (
                         <Text
+                            offsetY={fontSize}
                             x={5.5}
-                            y={
-                                calculateCentering(headerHeight, lineHeight) +
-                                fontSize / 2
-                            }
+                            y={ARROW_HEIGHT + ARROW_Y}
                             fontSize={fontSize}
                             fontFamily="futura-pt-bold"
                             fontVariant="bold"
                             text="INSERT THIS END"
                             fill={theme.fgColor}
-                            lineHeight={1}
+                            lineHeight={fontSize}
                         />
                     ) : null}
                     <MDLogo
