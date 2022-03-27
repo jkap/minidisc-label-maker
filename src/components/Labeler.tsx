@@ -37,6 +37,7 @@ const AlbumArt: React.FC<{
     const [scaleFactor, setScaleFactor] = useState(1);
 
     const image = new Image();
+    image.crossOrigin = "anonymous";
     image.addEventListener("load", () => {
         if (image.width >= image.height) {
             setDisplayWidth(width);
@@ -69,6 +70,7 @@ const MDLogo: React.FC<{
     const [displayHeight, setDisplayHeight] = useState(0);
 
     const image = new Image();
+    image.crossOrigin = "anonymous";
     image.addEventListener("load", () => {
         setDisplayHeight(image.height / PPM_FACTOR);
         setDisplayWidth(image.width / PPM_FACTOR);

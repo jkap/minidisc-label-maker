@@ -137,18 +137,16 @@ export const App: React.FC = () => {
             </label>
             <p>
                 developed by <a href="https://twitter.com/jkap">jae kaplan</a>.
-                dm me on
-                <a href="https://twitter.com/jkap">twitter</a> or
+                dm me on <a href="https://twitter.com/jkap">twitter</a> or{" "}
                 <a href="https://reddit.com/u/yrfriendjkap">reddit</a> if you
                 need help or have questions
             </p>
             <p>
                 if you found this helpful, please consider throwing me a couple
-                bucks
-                <a href="https://ko-fi.com/jkap">on ko-fi!</a>
+                bucks <a href="https://ko-fi.com/jkap">on ko-fi!</a>
             </p>
             <p>
-                design inspired by
+                design inspired by{" "}
                 <a href="https://www.reddit.com/r/minidisc/comments/ful65q/recording_session_minidiscs_with_custom_labels/">
                     /u/aaarchvz
                 </a>
