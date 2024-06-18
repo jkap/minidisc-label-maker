@@ -15,6 +15,8 @@ import { Metadata } from "../minidisc-labeler";
 import { changeDpiDataUrl } from "changedpi";
 import WebFont from "webfontloader";
 
+export type Font = "futura-pt-bold" | "Atkinson Hyperlegible" | "B612";
+
 const PPM_FACTOR = 11.811;
 
 function calculateCentering(
@@ -97,6 +99,7 @@ const Meta: React.FC<{
     containerHeight: number;
     yOffset: number;
     margin: number;
+    font: Font;
 }> = ({
     artist,
     album,
@@ -107,6 +110,7 @@ const Meta: React.FC<{
     containerHeight,
     yOffset,
     margin,
+    font,
 }) => {
     const metaContentHeight = lineHeight + lineHeight + fontSize;
     const y = calculateCentering(containerHeight, metaContentHeight, yOffset);
@@ -115,7 +119,7 @@ const Meta: React.FC<{
             <Text
                 fontSize={fontSize}
                 text={album}
-                fontFamily="futura-pt-bold"
+                fontFamily={font}
                 fontVariant="bold"
                 fill={color}
                 x={margin}
@@ -125,7 +129,7 @@ const Meta: React.FC<{
             <Text
                 fontSize={fontSize}
                 text={artist}
-                fontFamily="futura-pt-bold"
+                fontFamily={font}
                 fontVariant="bold"
                 fill={color}
                 x={margin}
@@ -135,7 +139,7 @@ const Meta: React.FC<{
             <Text
                 fontSize={fontSize}
                 text={year}
-                fontFamily="futura-pt-bold"
+                fontFamily={font}
                 fontVariant="bold"
                 fill={color}
                 x={margin}
@@ -157,6 +161,7 @@ export type LabelerProps = {
     metaContainerHeight: number;
     meta: Metadata;
     uppercase: boolean;
+    font: Font;
 };
 
 export const Labeler: React.FC<LabelerProps> = ({
@@ -170,6 +175,7 @@ export const Labeler: React.FC<LabelerProps> = ({
     metaContainerHeight,
     meta,
     uppercase,
+    font,
 }) => {
     const ARROW_HEIGHT = 1.25;
     const ARROW_Y = calculateCentering(headerHeight, ARROW_HEIGHT, 0);
@@ -178,8 +184,6 @@ export const Labeler: React.FC<LabelerProps> = ({
 
     const downloadArt: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
         if (!stage.current) return;
-
-        window.sa_event("download_art");
 
         let url = stage.current.toDataURL();
         url = changeDpiDataUrl(url, 300);
@@ -190,8 +194,6 @@ export const Labeler: React.FC<LabelerProps> = ({
     const redraw = () => {
         if (!stage.current) return;
 
-        window.sa_event("redraw_art");
-
         stage.current.draw();
     };
 
@@ -199,6 +201,9 @@ export const Labeler: React.FC<LabelerProps> = ({
         WebFont.load({
             typekit: {
                 id: "elb5ydo",
+            },
+            google: {
+                families: ["Atkinson Hyperlegible:bold", "B612:bold"],
             },
             active: () => setFontLoaded(true),
         });
@@ -235,7 +240,7 @@ export const Labeler: React.FC<LabelerProps> = ({
                             x={5.5}
                             y={ARROW_HEIGHT + ARROW_Y}
                             fontSize={fontSize}
-                            fontFamily="futura-pt-bold"
+                            fontFamily={font}
                             fontVariant="bold"
                             text="INSERT THIS END"
                             fill={theme.fgColor}
@@ -275,6 +280,7 @@ export const Labeler: React.FC<LabelerProps> = ({
                             lineHeight={lineHeight}
                             yOffset={width + headerHeight}
                             margin={leftMargin}
+                            font={font}
                         />
                     ) : null}
                 </Layer>

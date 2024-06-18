@@ -1,3 +1,4 @@
+/* globals caches, addEventListener */
 import { manifest, version } from "@parcel/service-worker";
 
 async function install() {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { Labeler } from "./components/Labeler";
+import { Labeler, Font } from "./components/Labeler";
 import { getRandomMeta } from "./meta";
 import { Themes } from "./themes";
 
@@ -8,6 +8,20 @@ export const App: React.FC = () => {
     const [meta, setMeta] = useState(getRandomMeta());
     const [uppercase, setUppercase] = useState(true);
     const [theme, setTheme] = useState(Themes.Dark);
+    const [font, setFont] = useState<Font>("futura-pt-bold");
+
+    function newPreset() {
+        let i = 0;
+        while (i < 3) {
+            const candidate = getRandomMeta();
+            if (candidate.album !== meta.album) {
+                setMeta(getRandomMeta());
+                return;
+            }
+            i++;
+        }
+        setMeta(getRandomMeta());
+    }
 
     return (
         <div className="container">
@@ -22,6 +36,7 @@ export const App: React.FC = () => {
                 metaContainerHeight={11}
                 meta={meta}
                 uppercase={uppercase}
+                font={font}
             />
             <p>
                 <label>
@@ -123,6 +138,44 @@ export const App: React.FC = () => {
                         <span>Light</span>
                     </label>
                 </p>
+            </label>
+            <label>
+                font
+                <p>
+                    <label>
+                        <input
+                            className="with-gap"
+                            type="radio"
+                            checked={font === "futura-pt-bold"}
+                            onChange={() => setFont("futura-pt-bold")}
+                        />
+                        <span>Futura</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input
+                            className="with-gap"
+                            type="radio"
+                            checked={font === "Atkinson Hyperlegible"}
+                            onChange={() => setFont("Atkinson Hyperlegible")}
+                        />
+                        <span>Atkinson Hyperlegible</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input
+                            className="with-gap"
+                            type="radio"
+                            checked={font === "B612"}
+                            onChange={() => setFont("B612")}
+                        />
+                        <span>B612</span>
+                    </label>
+                </p>
+            </label>
+            <label>
                 <p>
                     <label>
                         <input
@@ -135,11 +188,13 @@ export const App: React.FC = () => {
                     </label>
                 </p>
             </label>
+            <button className="btn-small" onClick={() => newPreset()}>
+                new random preset
+            </button>
             <p>
-                developed by <a href="https://twitter.com/jkap">jae kaplan</a>.
-                dm me on <a href="https://twitter.com/jkap">twitter</a> or{" "}
-                <a href="https://reddit.com/u/yrfriendjkap">reddit</a> if you
-                need help or have questions
+                developed by <a href="https://cohost.org/jkap">jae kaplan</a>.
+                dm me on <a href="https://reddit.com/u/yrfriendjkap">reddit</a>{" "}
+                if you need help or have questions
             </p>
             <p>
                 if you found this helpful, please consider throwing me a couple

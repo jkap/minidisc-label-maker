@@ -40,7 +40,7 @@ export class MinidiscLabeler {
         intialMeta: Metadata
     ) {
         this.canvas = canvas;
-        this.ctx = canvas.getContext("2d");
+        this.ctx = canvas.getContext("2d")!;
         this.settings = settings;
         this.meta = intialMeta;
         this.setupDrawing();
@@ -76,7 +76,7 @@ export class MinidiscLabeler {
 
     private drawArrow() {
         const ARROW_HEIGHT = 1.25;
-        let y = this.calculateCentering(
+        const y = this.calculateCentering(
             this.settings.headerHeight,
             ARROW_HEIGHT,
             0
@@ -97,7 +97,7 @@ export class MinidiscLabeler {
         this.ctx.font = `bold ${this.settings.fontSize}px futura-pt-bold`;
         this.ctx.fillStyle = this.settings.theme.fgColor;
 
-        let y = this.calculateCentering(
+        const y = this.calculateCentering(
             this.settings.headerHeight,
             this.settings.lineHeight,
             0
@@ -198,9 +198,8 @@ export class MinidiscLabeler {
             this.settings.lineHeight +
             this.settings.lineHeight +
             this.settings.fontSize;
-        let y;
 
-        y = this.calculateCentering(
+        const y = this.calculateCentering(
             this.settings.metaContainerHeight,
             metaContentHeight,
             this.settings.width + this.settings.headerHeight
