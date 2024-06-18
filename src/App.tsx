@@ -201,6 +201,12 @@ export const App: React.FC = () => {
                 bucks <a href="https://ko-fi.com/jkap">on ko-fi!</a>
             </p>
             <p>
+                <a href="https://github.com/jkap/minidisc-label-maker">
+                    check out the code on github!
+                </a>{" "}
+                it's not very good but it gets the job done.
+            </p>
+            <p>
                 design inspired by{" "}
                 <a href="https://www.reddit.com/r/minidisc/comments/ful65q/recording_session_minidiscs_with_custom_labels/">
                     /u/aaarchvz
