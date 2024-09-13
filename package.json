@@ -25,7 +25,7 @@
         "url": "https://github.com/jkap/minidisc-label-maker"
     },
     "engines": {
-        "node": "22.x"
+        "node": "20.x"
     },
     "license": "MIT",
     "devDependencies": {
