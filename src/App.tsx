@@ -212,6 +212,13 @@ export const App: React.FC = () => {
                     /u/aaarchvz
                 </a>
             </p>
+            <p>
+                want more customization? check out{" "}
+                <a href="https://md-cover-designer.web.app/cover">
+                    MD Cover Designer
+                </a>{" "}
+                by <a href="https://reddit.com/u/RunePML">/u/RunePML</a>
+            </p>
         </div>
     );
 };
