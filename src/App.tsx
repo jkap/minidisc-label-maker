@@ -15,7 +15,7 @@ export const App: React.FC = () => {
         while (i < 3) {
             const candidate = getRandomMeta();
             if (candidate.album !== meta.album) {
-                setMeta(getRandomMeta());
+                setMeta(candidate);
                 return;
             }
             i++;

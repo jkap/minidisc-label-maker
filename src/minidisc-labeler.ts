@@ -24,7 +24,7 @@ export interface Metadata {
     artist: string;
     album: string;
     year: string;
-    artURL: string;
+    artURL: URL;
 }
 
 export class MinidiscLabeler {
@@ -151,7 +151,7 @@ export class MinidiscLabeler {
             },
             false
         );
-        image.src = this.meta.artURL;
+        image.src = this.meta.artURL.toString();
     }
 
     private drawMDLogo() {
@@ -254,7 +254,7 @@ export class MinidiscLabeler {
     }
 
     setAlbumArt(artURL: string) {
-        this.meta.artURL = artURL;
+        this.meta.artURL = new URL(artURL);
         this.drawAlbumArt();
     }
 
