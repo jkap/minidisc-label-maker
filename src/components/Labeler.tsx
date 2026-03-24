@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import type Konva from "konva";
 import {
     Stage,
@@ -100,6 +100,7 @@ const Meta: React.FC<{
     yOffset: number;
     margin: number;
     font: Font;
+    width: number;
 }> = ({
     artist,
     album,
@@ -111,42 +112,26 @@ const Meta: React.FC<{
     yOffset,
     margin,
     font,
+    width,
 }) => {
-    const metaContentHeight = lineHeight + lineHeight + fontSize;
-    const y = calculateCentering(containerHeight, metaContentHeight, yOffset);
+    const combinedString = useMemo(() => {
+        return [album, artist, year].join("\n");
+    }, [artist, album, year]);
+
     return (
-        <Group y={y}>
-            <Text
-                fontSize={fontSize}
-                text={album}
-                fontFamily={font}
-                fontVariant="bold"
-                fill={color}
-                x={margin}
-                y={0}
-                lineHeight={fontSize}
-            />
-            <Text
-                fontSize={fontSize}
-                text={artist}
-                fontFamily={font}
-                fontVariant="bold"
-                fill={color}
-                x={margin}
-                y={lineHeight}
-                lineHeight={fontSize}
-            />
-            <Text
-                fontSize={fontSize}
-                text={year}
-                fontFamily={font}
-                fontVariant="bold"
-                fill={color}
-                x={margin}
-                y={lineHeight * 2}
-                lineHeight={fontSize}
-            />
-        </Group>
+        <Text
+            fontSize={fontSize}
+            text={combinedString}
+            fontFamily={font}
+            fontVariant="bold"
+            fill={color}
+            x={margin}
+            y={yOffset}
+            lineHeight={lineHeight / fontSize}
+            width={width - margin * 2}
+            height={containerHeight}
+            verticalAlign="middle"
+        />
     );
 };
 
@@ -222,38 +207,42 @@ export const Labeler: React.FC<LabelerProps> = ({
                     <Rect height={54} width={38} fill={theme.bgColor} />
                 </Layer>
                 <Layer>
-                    <Line
-                        fill={theme.fgColor}
-                        closed={true}
-                        points={[
-                            leftMargin + ARROW_HEIGHT,
-                            ARROW_Y,
-                            leftMargin + ARROW_HEIGHT * 2,
-                            ARROW_Y + ARROW_HEIGHT,
-                            leftMargin,
-                            ARROW_Y + ARROW_HEIGHT,
-                        ]}
-                    />
-                    {fontLoaded ? (
-                        <Text
-                            offsetY={fontSize}
-                            x={5.5}
-                            y={ARROW_HEIGHT + ARROW_Y}
-                            fontSize={fontSize}
-                            fontFamily={font}
-                            fontVariant="bold"
-                            text="INSERT THIS END"
-                            fill={theme.fgColor}
-                            lineHeight={fontSize}
-                        />
-                    ) : null}
-                    <MDLogo
-                        y={0}
-                        x={width - leftMargin}
-                        headerHeight={headerHeight}
-                    />
+                    {headerHeight > 0 && (
+                        <>
+                            <Line
+                                fill={theme.fgColor}
+                                closed={true}
+                                points={[
+                                    leftMargin + ARROW_HEIGHT,
+                                    ARROW_Y,
+                                    leftMargin + ARROW_HEIGHT * 2,
+                                    ARROW_Y + ARROW_HEIGHT,
+                                    leftMargin,
+                                    ARROW_Y + ARROW_HEIGHT,
+                                ]}
+                            />
+                            {fontLoaded ? (
+                                <Text
+                                    offsetY={fontSize}
+                                    x={5.5}
+                                    y={ARROW_HEIGHT + ARROW_Y}
+                                    fontSize={fontSize}
+                                    fontFamily={font}
+                                    fontVariant="bold"
+                                    text="INSERT THIS END"
+                                    fill={theme.fgColor}
+                                    lineHeight={fontSize}
+                                />
+                            ) : null}
+                            <MDLogo
+                                y={0}
+                                x={width - leftMargin}
+                                headerHeight={headerHeight}
+                            />
+                        </>
+                    )}
                     <AlbumArt
-                        src={meta.artURL}
+                        src={meta.artURL.toString()}
                         height={width}
                         width={width}
                         x={0}
@@ -281,6 +270,7 @@ export const Labeler: React.FC<LabelerProps> = ({
                             yOffset={width + headerHeight}
                             margin={leftMargin}
                             font={font}
+                            width={width}
                         />
                     ) : null}
                 </Layer>

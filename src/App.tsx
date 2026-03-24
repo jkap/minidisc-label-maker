@@ -7,6 +7,7 @@ import { Themes } from "./themes";
 export const App: React.FC = () => {
     const [meta, setMeta] = useState(getRandomMeta());
     const [uppercase, setUppercase] = useState(true);
+    const [hideHeader, setHideHeader] = useState(false);
     const [theme, setTheme] = useState(Themes.Dark);
     const [font, setFont] = useState<Font>("futura-pt-bold");
 
@@ -30,10 +31,10 @@ export const App: React.FC = () => {
                 height={54}
                 theme={theme}
                 fontSize={1.76}
-                headerHeight={5}
+                headerHeight={hideHeader ? 0 : 5}
                 leftMargin={2}
                 lineHeight={2.12}
-                metaContainerHeight={11}
+                metaContainerHeight={hideHeader ? 16 : 11}
                 meta={meta}
                 uppercase={uppercase}
                 font={font}
@@ -95,7 +96,10 @@ export const App: React.FC = () => {
                                 reader.onload = function () {
                                     setMeta({
                                         ...meta,
-                                        artURL: reader.result as string,
+                                        artURL:
+                                            typeof reader.result === "string"
+                                                ? new URL(reader.result)
+                                                : meta.artURL,
                                     });
                                 };
                                 if (currentTarget.files)
@@ -182,12 +186,26 @@ export const App: React.FC = () => {
                             type="checkbox"
                             className="filled-in"
                             checked={uppercase}
-                            onChange={() => setUppercase(!uppercase)}
+                            onChange={() => setUppercase((val) => !val)}
                         />
                         <span>uppercase</span>
                     </label>
                 </p>
             </label>
+            <label>
+                <p>
+                    <label>
+                        <input
+                            type="checkbox"
+                            className="filled-in"
+                            checked={hideHeader}
+                            onChange={() => setHideHeader((val) => !val)}
+                        />
+                        <span>hide header</span>
+                    </label>
+                </p>
+            </label>
+
             <button className="btn-small" onClick={() => newPreset()}>
                 new random preset
             </button>
